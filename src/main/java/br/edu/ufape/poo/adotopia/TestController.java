@@ -11,6 +11,5 @@ public class TestController {
     public String index() {
         return "Greetings from Spring Boot!";
     }
-    @DeleteMapping("/adotopia/${id}")
 
 }

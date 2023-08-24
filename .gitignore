@@ -22,9 +22,6 @@ target/
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
-/.mvn
-/mvnw
-/mvnw.cmd
 /dist/
 /nbdist/
 /.nb-gradle/
