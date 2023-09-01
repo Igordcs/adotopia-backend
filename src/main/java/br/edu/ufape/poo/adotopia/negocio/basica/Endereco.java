@@ -49,6 +49,14 @@ public class Endereco {
         this.logradouro = logradouro;
     }
 
+    public String getComplemento() {
+        return this.complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
     public String getBairro() {
         return this.bairro;
     }
