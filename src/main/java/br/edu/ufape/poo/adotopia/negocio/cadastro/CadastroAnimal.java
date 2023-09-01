@@ -30,7 +30,7 @@ public class CadastroAnimal implements InterfaceCadastroAnimal {
         return colecaoAnimal.save(entity);
     }
 
-    public List<Animal> findByDonoId(Long donoId) throws UsuarioNaoEncontradoException {
+    public List<Animal> listarAnimaisPeloDono(Long donoId) throws UsuarioNaoEncontradoException {
         Usuario usuario = cadastroUsuario.encontraUsuario(donoId);
         if (usuario == null)
             throw new UsuarioNaoEncontradoException(donoId);
