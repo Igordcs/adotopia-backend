@@ -15,8 +15,6 @@ public class Usuario {
     private String email;
     @OneToOne(cascade=CascadeType.ALL)
     private Endereco endereco;
-    @OneToMany(mappedBy = "dono", cascade=CascadeType.ALL)
-    private List<Animal> meusPets;
     private String descricao;
 
     public Usuario(String nome, String telefone, String email, Endereco endereco, String descricao) {
@@ -26,7 +24,6 @@ public class Usuario {
         this.telefone = telefone;
         this.endereco = endereco;
         this.descricao = descricao;
-        this.meusPets = null;
     }
 
     public Usuario() {
@@ -70,14 +67,6 @@ public class Usuario {
     }
     public void setDescricao(String descricao){
         this.descricao = descricao;
-    }
-
-    public List<Animal> getMeusPets() {
-        return this.meusPets;
-    }
-
-    public void setMeusPets(List<Animal> meusPets) {
-        this.meusPets = meusPets;
     }
 
 }

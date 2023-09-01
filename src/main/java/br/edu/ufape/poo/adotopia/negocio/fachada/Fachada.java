@@ -43,7 +43,11 @@ public class Fachada {
         return cadastroAnimal.listarAnimais();
     }
 
-    public Animal salvarAnimal(Animal entity){
+    public Animal salvarAnimal(Animal entity) throws UsuarioNaoEncontradoException{
         return cadastroAnimal.salvarAnimal(entity);
+    }
+
+    public List<Animal> listarAnimaisPorDono(Long donoId) throws UsuarioNaoEncontradoException {
+        return cadastroAnimal.listarAnimaisPeloDono(donoId);
     }
 }

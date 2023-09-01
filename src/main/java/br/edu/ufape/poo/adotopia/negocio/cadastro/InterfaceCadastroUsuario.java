@@ -19,6 +19,4 @@ public interface InterfaceCadastroUsuario {
     public Usuario encontraUsuario(Long id);
 
     public Usuario deletarUsuario(Long id) throws UsuarioNaoEncontradoException;
-
-    public Usuario adicionarAnimal (Animal animal);
 }

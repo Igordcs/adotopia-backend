@@ -24,7 +24,7 @@ public class CadastroUsuario implements InterfaceCadastroUsuario {
     public Usuario procurarUsuarioEmail(String email) throws UsuarioNaoEncontradoException {
         Usuario usuario = colecaoUsuario.findByEmail(email).orElse(null);
         if(usuario == null) {
-            throw new UsuarioNaoEncontradoException(email);
+            throw new UsuarioNaoEncontradoException(null);
         }
         return usuario;
     } 
@@ -52,7 +52,6 @@ public class CadastroUsuario implements InterfaceCadastroUsuario {
         user.setEmail(entity.getEmail());
         user.setTelefone(entity.getTelefone());
         user.setDescricao(entity.getDescricao());        
-        user.setMeusPets(entity.getMeusPets());
 
         if(entity.getEndereco() != null) {
             Endereco enderecoUsuario = user.getEndereco();
@@ -73,17 +72,5 @@ public class CadastroUsuario implements InterfaceCadastroUsuario {
 
         colecaoUsuario.deleteById(id);
         return usuario;
-    }
-
-    public Usuario adicionarAnimal(Animal animal){
-        Usuario usuario = encontraUsuario(animal.getDonoId());
-        if(usuario == null)
-            return null;
-
-        List <Animal> usuarioAnimais = usuario.getMeusPets();
-        usuarioAnimais.add(animal);
-        usuario.setMeusPets(usuarioAnimais);	
-        return colecaoUsuario.saveAndFlush(usuario);
-
     }
 }

@@ -10,8 +10,6 @@ public class Animal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String avatar;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "dono_id")
     private Long donoId;
     private List<String> fotos;
     private String especie;
