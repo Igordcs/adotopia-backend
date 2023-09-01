@@ -30,4 +30,8 @@ public class Fachada {
     public Usuario alterarUsuario(Usuario entity) throws UsuarioNaoEncontradoException{
         return cadastroUsuario.alterarUsuario(entity);
     }
+
+    public Usuario deletarUsuario(Long id) throws UsuarioNaoEncontradoException{
+        return cadastroUsuario.deletarUsuario(id);
+    }
 }
