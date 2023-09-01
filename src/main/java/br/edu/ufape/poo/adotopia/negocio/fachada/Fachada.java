@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.edu.ufape.poo.adotopia.negocio.basica.Animal;
 import br.edu.ufape.poo.adotopia.negocio.basica.Usuario;
+import br.edu.ufape.poo.adotopia.negocio.cadastro.CadastroAnimal;
 import br.edu.ufape.poo.adotopia.negocio.cadastro.CadastroUsuario;
 import br.edu.ufape.poo.adotopia.negocio.cadastro.exception.UsuarioJaCadastradoException;
 import br.edu.ufape.poo.adotopia.negocio.cadastro.exception.UsuarioNaoEncontradoException;
@@ -14,6 +16,8 @@ import br.edu.ufape.poo.adotopia.negocio.cadastro.exception.UsuarioNaoEncontrado
 public class Fachada {
     @Autowired
     private CadastroUsuario cadastroUsuario;
+    @Autowired
+    private CadastroAnimal cadastroAnimal;
 
     public List<Usuario> listarUsuarios() {
         return cadastroUsuario.listarUsuarios();
@@ -33,5 +37,13 @@ public class Fachada {
 
     public Usuario deletarUsuario(Long id) throws UsuarioNaoEncontradoException{
         return cadastroUsuario.deletarUsuario(id);
+    }
+
+    public List<Animal> listarAnimais(){
+        return cadastroAnimal.listarAnimais();
+    }
+
+    public Animal salvarAnimal(Animal entity){
+        return cadastroAnimal.salvarAnimal(entity);
     }
 }

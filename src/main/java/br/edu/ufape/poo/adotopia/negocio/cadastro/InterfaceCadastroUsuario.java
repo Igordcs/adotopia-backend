@@ -2,6 +2,7 @@ package br.edu.ufape.poo.adotopia.negocio.cadastro;
 
 import java.util.List;
 
+import br.edu.ufape.poo.adotopia.negocio.basica.Animal;
 import br.edu.ufape.poo.adotopia.negocio.basica.Usuario;
 import br.edu.ufape.poo.adotopia.negocio.cadastro.exception.UsuarioJaCadastradoException;
 import br.edu.ufape.poo.adotopia.negocio.cadastro.exception.UsuarioNaoEncontradoException;
@@ -18,4 +19,6 @@ public interface InterfaceCadastroUsuario {
     public Usuario encontraUsuario(Long id);
 
     public Usuario deletarUsuario(Long id) throws UsuarioNaoEncontradoException;
+
+    public Usuario adicionarAnimal (Animal animal);
 }

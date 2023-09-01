@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.edu.ufape.poo.adotopia.dados.InterfaceColecaoUsuario;
+import br.edu.ufape.poo.adotopia.negocio.basica.Animal;
 import br.edu.ufape.poo.adotopia.negocio.basica.Endereco;
 import br.edu.ufape.poo.adotopia.negocio.basica.Usuario;
 import br.edu.ufape.poo.adotopia.negocio.cadastro.exception.UsuarioJaCadastradoException;
@@ -72,5 +73,17 @@ public class CadastroUsuario implements InterfaceCadastroUsuario {
 
         colecaoUsuario.deleteById(id);
         return usuario;
+    }
+
+    public Usuario adicionarAnimal(Animal animal){
+        Usuario usuario = encontraUsuario(animal.getDonoId());
+        if(usuario == null)
+            return null;
+
+        List <Animal> usuarioAnimais = usuario.getMeusPets();
+        usuarioAnimais.add(animal);
+        usuario.setMeusPets(usuarioAnimais);	
+        return colecaoUsuario.saveAndFlush(usuario);
+
     }
 }

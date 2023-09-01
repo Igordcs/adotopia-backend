@@ -10,8 +10,9 @@ public class Animal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String avatar;
-    @ManyToOne
-    private Usuario dono;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "dono_id")
+    private Long donoId;
     private List<String> fotos;
     private String especie;
     private String raca;
@@ -20,9 +21,9 @@ public class Animal {
     private int idadeAnos;
     private int idadeMeses;
 
-    public Animal(String avatar, Usuario dono, List<String> fotos, String especie, String raca, String porte, String descricao, int idadeAnos, int idadeMeses) {
+    public Animal(String avatar, Long donoId, List<String> fotos, String especie, String raca, String porte, String descricao, int idadeAnos, int idadeMeses) {
         super();
-        this.dono = dono;
+        this.donoId = donoId;
         this.avatar = avatar;
         this.fotos = fotos;
         this.especie = especie;
@@ -51,6 +52,15 @@ public class Animal {
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
+
+    public long getDonoId() {
+        return this.donoId;
+    }
+
+    public void setDonoId(long donoId) {
+        this.donoId = donoId;
+    }
+
     public List<String> getFotos(){
         return this.fotos;
     }

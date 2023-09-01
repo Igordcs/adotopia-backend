@@ -15,7 +15,7 @@ public class Usuario {
     private String email;
     @OneToOne(cascade=CascadeType.ALL)
     private Endereco endereco;
-    @OneToMany(cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "dono", cascade=CascadeType.ALL)
     private List<Animal> meusPets;
     private String descricao;
 
