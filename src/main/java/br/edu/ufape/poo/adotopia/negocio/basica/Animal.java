@@ -10,6 +10,8 @@ public class Animal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String avatar;
+    @ManyToOne
+    private Usuario dono;
     private List<String> fotos;
     private String especie;
     private String raca;
@@ -18,8 +20,9 @@ public class Animal {
     private int idadeAnos;
     private int idadeMeses;
 
-    public Animal(String avatar, List<String> fotos, String especie,String raca, String porte, String descricao, int idadeAnos, int idadeMeses) {
+    public Animal(String avatar, Usuario dono, List<String> fotos, String especie, String raca, String porte, String descricao, int idadeAnos, int idadeMeses) {
         super();
+        this.dono = dono;
         this.avatar = avatar;
         this.fotos = fotos;
         this.especie = especie;

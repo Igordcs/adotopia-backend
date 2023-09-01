@@ -2,7 +2,6 @@ package br.edu.ufape.poo.adotopia.negocio.basica;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,16 +12,21 @@ public class Usuario {
 
     private String nome;
     private String telefone;
-    @OneToOne
+    private String email;
+    @OneToOne(cascade=CascadeType.ALL)
     private Endereco endereco;
+    @OneToMany(cascade=CascadeType.ALL)
+    private List<Animal> meusPets;
     private String descricao;
 
-    public Usuario(String nome, String telefone, Endereco endereco, String descricao) {
+    public Usuario(String nome, String telefone, String email, Endereco endereco, String descricao) {
         super();
         this.nome = nome;
+        this.email = email;
         this.telefone = telefone;
         this.endereco = endereco;
         this.descricao = descricao;
+        this.meusPets = null;
     }
 
     public Usuario() {
@@ -49,6 +53,12 @@ public class Usuario {
     public void setTelefone(String telefone){
         this.telefone = telefone;
     }
+    public String getEmail(){
+        return this.email;
+    }
+    public void setEmail(String email){
+        this.email = email;
+    }
     public Endereco getEndereco(){
         return this.endereco;
     }
@@ -60,6 +70,14 @@ public class Usuario {
     }
     public void setDescricao(String descricao){
         this.descricao = descricao;
+    }
+
+    public List<Animal> getMeusPets() {
+        return this.meusPets;
+    }
+
+    public void setMeusPets(List<Animal> meusPets) {
+        this.meusPets = meusPets;
     }
 
 }
