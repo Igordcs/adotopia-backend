@@ -2,6 +2,7 @@ package br.edu.ufape.poo.adotopia.negocio.cadastro;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.edu.ufape.poo.adotopia.dados.InterfaceColecaoUsuario;
@@ -64,4 +65,12 @@ public class CadastroUsuario implements InterfaceCadastroUsuario {
         return colecaoUsuario.saveAndFlush(user);
     }
 
+    public Usuario deletarUsuario(Long id) throws UsuarioNaoEncontradoException {
+        Usuario usuario = encontraUsuario(id);
+        if (usuario == null)
+            return null;
+
+        colecaoUsuario.deleteById(id);
+        return usuario;
+    }
 }
