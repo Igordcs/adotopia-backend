@@ -3,6 +3,7 @@ package br.edu.ufape.poo.adotopia.comunicacao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,31 +11,32 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.ufape.poo.adotopia.negocio.basica.Animal;
 import br.edu.ufape.poo.adotopia.negocio.basica.Mensagem;
-import br.edu.ufape.poo.adotopia.negocio.cadastro.exception.UsuarioNaoEncontradoException;
 import br.edu.ufape.poo.adotopia.negocio.fachada.Fachada;
 
 @RestController
-@RequestMapping("/animal")
-public class AnimalController {
-
+@RequestMapping("/mensagem")
+public class MensagemController {
     @Autowired
     private Fachada fachada;
 
-    @GetMapping()
-    public List<Animal> listarAnimais(){
-        return fachada.listarAnimais();
+    @GetMapping("/todas")
+    public List<Mensagem> listarTodasMensagens(){
+        return fachada.listarTodasMensagens();
     }
 
     @GetMapping("/{id}")
-    public List<Animal> listarAnimaisPorDono(@PathVariable Long id) throws UsuarioNaoEncontradoException {
-        return fachada.listarAnimaisPorDono(id);
+    public List<Mensagem> listarMensagensRemetente(@PathVariable Long id) {
+        return fachada.listarMensagensRemetente(id);
     }
 
-    @PostMapping("/adicionar")
-    public Animal salvarAnimal(@RequestBody Animal animal) throws UsuarioNaoEncontradoException{
-        return fachada.salvarAnimal(animal);
+    @PostMapping("/enviar")
+    public Mensagem enviarMensagem(@RequestBody Mensagem mensagem){
+        return fachada.enviarMensagem(mensagem);
     }
-    
+
+    @DeleteMapping("/deletar/{id}")
+    public Mensagem deletarMensagem(@PathVariable Long id){
+        return fachada.deletarMensagem(id);
+    }
 }

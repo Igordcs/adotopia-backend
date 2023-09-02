@@ -2,7 +2,6 @@ package br.edu.ufape.poo.adotopia.negocio.basica;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 @Entity
@@ -12,15 +11,15 @@ public class Mensagem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String conteudoMsg;
-    private String destinatario;
-    private String remetente;
+    private Long destinatarioId;
+    private Long remetenteId;
     private Date data;
 
-    public Mensagem(String conteudoMsg, String destinatario, String remetente, Date data) {
+    public Mensagem(String conteudoMsg, Long destinatarioId, Long remetenteId, Date data) {
         super();
         this.conteudoMsg = conteudoMsg;
-        this.destinatario = destinatario;
-        this.remetente = remetente;
+        this.destinatarioId = destinatarioId;
+        this.remetenteId = remetenteId;
         this.data = data;
     }
 
@@ -36,11 +35,11 @@ public class Mensagem {
         this.id = id;
     }
 
-    public String getDestinatario() {
-        return this.destinatario;
+    public Long getDestinatarioId() {
+        return this.destinatarioId;
     }
-    public void setDestinatario(String destinatario) {
-        this.destinatario = destinatario;
+    public void setDestinatarioId(Long destinatarioId) {
+        this.destinatarioId = destinatarioId;
     }
     public String getConteudoMsg() {
         return conteudoMsg;
@@ -48,11 +47,11 @@ public class Mensagem {
     public void setConteudoMsg(String conteudoMsg) {
         this.conteudoMsg = conteudoMsg;
     }
-    public String getRemetente() {
-        return this.remetente;
+    public Long getRemetenteId() {
+        return this.remetenteId;
     }
-    public void setRemetente(String remetente) {
-        this.remetente = remetente;
+    public void setRemetenteId(Long remetenteId) {
+        this.remetenteId = remetenteId;
     }
     public Date getData() {
         return this.data;

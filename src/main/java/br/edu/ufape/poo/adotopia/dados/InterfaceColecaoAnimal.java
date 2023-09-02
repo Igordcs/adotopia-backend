@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface InterfaceColecaoAnimal extends JpaRepository <Animal, Long> {
 
-    public List<Animal> findByDonoId(long donoId);
+    public List<Animal> findByDonoId(Long donoId);
     
 }

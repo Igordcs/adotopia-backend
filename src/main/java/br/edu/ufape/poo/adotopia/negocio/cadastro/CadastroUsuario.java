@@ -2,11 +2,9 @@ package br.edu.ufape.poo.adotopia.negocio.cadastro;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.edu.ufape.poo.adotopia.dados.InterfaceColecaoUsuario;
-import br.edu.ufape.poo.adotopia.negocio.basica.Animal;
 import br.edu.ufape.poo.adotopia.negocio.basica.Endereco;
 import br.edu.ufape.poo.adotopia.negocio.basica.Usuario;
 import br.edu.ufape.poo.adotopia.negocio.cadastro.exception.UsuarioJaCadastradoException;
