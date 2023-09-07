@@ -20,12 +20,12 @@ public class MensagemController {
     @Autowired
     private Fachada fachada;
 
-    @GetMapping("/todas")
+    @GetMapping("/listar")
     public List<Mensagem> listarTodasMensagens(){
         return fachada.listarTodasMensagens();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/listar/{id}")
     public List<Mensagem> listarMensagensRemetente(@PathVariable Long id) {
         return fachada.listarMensagensRemetente(id);
     }
