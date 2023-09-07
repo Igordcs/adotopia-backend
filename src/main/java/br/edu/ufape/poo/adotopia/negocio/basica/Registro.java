@@ -11,16 +11,17 @@ public class Registro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String adotante;
-    private String doador;
-
+    private Long adotanteId;
+    private Long doadorId;
+    private Status status;
     private Date data;
     private String protocolo;
 
-    public Registro(String adotante, String doador, Date data, String protocolo) {
+    public Registro(Long adotanteId, Long doadorId, Status status, Date data, String protocolo) {
         super();
-        this.adotante = adotante;
-        this.doador = doador;
+        this.adotanteId = adotanteId;
+        this.doadorId = doadorId;
+        this.status = status;
         this.data = data;
         this.protocolo = protocolo;
     }
@@ -35,18 +36,28 @@ public class Registro {
         this.id = id;
     }
 
-    public String getAdotante() {
-        return this.adotante;
+    public Long getAdotanteId() {
+        return this.adotanteId;
     }
-    public void setAdotante(String adotante) {
-        this.adotante = adotante;
+    public void setAdotanteId(Long adotanteId) {
+        this.adotanteId = adotanteId;
     }
-    public String getDoador() {
-        return this.doador;
+    public Long getDoadorId() {
+        return this.doadorId;
     }
-    public void setDoador(String doador) {
-        this.doador = doador;
+    public void setDoadorId(Long doadorId) {
+        this.doadorId = doadorId;
     }
+    
+    public Status getStatus(){
+        return this.status;
+    }
+
+    public void setStatus(Status status){
+        this.status = status;
+    }
+
+
     public Date getData() {
         return this.data;
     }

@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 
 import br.edu.ufape.poo.adotopia.negocio.basica.Animal;
 import br.edu.ufape.poo.adotopia.negocio.basica.Mensagem;
+import br.edu.ufape.poo.adotopia.negocio.basica.Registro;
 import br.edu.ufape.poo.adotopia.negocio.basica.Usuario;
 import br.edu.ufape.poo.adotopia.negocio.cadastro.CadastroAnimal;
 import br.edu.ufape.poo.adotopia.negocio.cadastro.CadastroMensagem;
+import br.edu.ufape.poo.adotopia.negocio.cadastro.CadastroRegistro;
 import br.edu.ufape.poo.adotopia.negocio.cadastro.CadastroUsuario;
 import br.edu.ufape.poo.adotopia.negocio.cadastro.exception.UsuarioJaCadastradoException;
 import br.edu.ufape.poo.adotopia.negocio.cadastro.exception.UsuarioNaoEncontradoException;
@@ -22,6 +24,8 @@ public class Fachada {
     private CadastroAnimal cadastroAnimal;
     @Autowired
     private CadastroMensagem cadastroMensagem;
+    @Autowired
+    private CadastroRegistro cadastroRegistro;
 
     public List<Usuario> listarUsuarios() {
         return cadastroUsuario.listarUsuarios();
@@ -69,5 +73,17 @@ public class Fachada {
 
     public Mensagem deletarMensagem(Long id){
         return cadastroMensagem.deletarMensagem(id);
+    }
+
+    public List<Registro> listarRegistros(){
+        return cadastroRegistro.listarRegistros();
+    }
+
+    public Registro salvarRegistro(Registro entity) throws UsuarioNaoEncontradoException{
+        return cadastroRegistro.salvarRegistro(entity);
+    }
+
+    public List<Registro> listarRegistrosporadotante(Long AdotanteId) throws UsuarioNaoEncontradoException{
+        return cadastroRegistro.listarRegistrosporadotante(AdotanteId);
     }
 }
