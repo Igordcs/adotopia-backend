@@ -26,7 +26,6 @@ public class Endereco {
         this.numero = numero;
         this.uf = uf;
         this.cep = cep;
-        this.numero = numero;
     }
 
     public Endereco() {

@@ -1,6 +1,7 @@
 package br.edu.ufape.poo.adotopia.negocio.fachada;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,8 @@ import br.edu.ufape.poo.adotopia.negocio.cadastro.CadastroChat;
 import br.edu.ufape.poo.adotopia.negocio.cadastro.CadastroMensagem;
 import br.edu.ufape.poo.adotopia.negocio.cadastro.CadastroRegistro;
 import br.edu.ufape.poo.adotopia.negocio.cadastro.CadastroUsuario;
+import br.edu.ufape.poo.adotopia.negocio.cadastro.exception.AnimalNaoEncontradoException;
+import br.edu.ufape.poo.adotopia.negocio.cadastro.exception.ChatJaCriadoException;
 import br.edu.ufape.poo.adotopia.negocio.cadastro.exception.UsuarioJaCadastradoException;
 import br.edu.ufape.poo.adotopia.negocio.cadastro.exception.UsuarioNaoEncontradoException;
 
@@ -87,7 +90,19 @@ public class Fachada {
         return cadastroUsuario.adotarAnimal(usuarioId, animalId);
     }
 
-    public Chat criarChat (Long remetenteId, Long destinatarioId){
+    public Chat criarChat (Long remetenteId, Long destinatarioId) throws NoSuchElementException, ChatJaCriadoException{
         return cadastroChat.criarChat(remetenteId, destinatarioId);
+    }
+
+    public Animal alterarAnimal(Animal entity, Long id) throws AnimalNaoEncontradoException, UsuarioNaoEncontradoException{
+        return cadastroAnimal.alterarAnimal(entity, id);
+    }
+
+    public Animal encontraAnimal(Long id) throws AnimalNaoEncontradoException{
+        return cadastroAnimal.encontraAnimal(id);
+    }
+
+    public Animal deletarAnimal(Long id) throws AnimalNaoEncontradoException{
+        return cadastroAnimal.deletarAnimal(id);
     }
 }

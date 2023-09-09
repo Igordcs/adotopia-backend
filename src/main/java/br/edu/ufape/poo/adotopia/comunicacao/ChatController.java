@@ -1,6 +1,7 @@
 package br.edu.ufape.poo.adotopia.comunicacao;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ufape.poo.adotopia.negocio.basica.Chat;
+import br.edu.ufape.poo.adotopia.negocio.cadastro.exception.ChatJaCriadoException;
 import br.edu.ufape.poo.adotopia.negocio.fachada.Fachada;
 
 @RestController
@@ -29,7 +31,7 @@ public class ChatController {
     }
 
     @PostMapping("/{remetenteId}/{destinatarioId}")
-    public Chat criarChat(@PathVariable Long remetenteId, @PathVariable Long destinatarioId){
+    public Chat criarChat(@PathVariable Long remetenteId, @PathVariable Long destinatarioId) throws NoSuchElementException, ChatJaCriadoException{
         return fachada.criarChat(remetenteId, destinatarioId);
     }
 

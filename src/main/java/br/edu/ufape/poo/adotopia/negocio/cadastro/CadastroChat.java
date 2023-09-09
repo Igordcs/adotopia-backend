@@ -11,6 +11,7 @@ import br.edu.ufape.poo.adotopia.dados.InterfaceColecaoUsuario;
 import br.edu.ufape.poo.adotopia.negocio.basica.Chat;
 import br.edu.ufape.poo.adotopia.negocio.basica.Mensagem;
 import br.edu.ufape.poo.adotopia.negocio.basica.Usuario;
+import br.edu.ufape.poo.adotopia.negocio.cadastro.exception.ChatJaCriadoException;
 
 @Service
 public class CadastroChat implements InterfaceCadastroChat {
@@ -28,13 +29,29 @@ public class CadastroChat implements InterfaceCadastroChat {
 		  return colecaoChat.findAllByRemetenteIdOrDestinatarioId(id, id);
     }
 
-    public Chat criarChat(Long remetenteId, Long destinatarioId){
+    /* public Chat criarChat(Long remetenteId, Long destinatarioId){
       Usuario remetente = colecaoUsuario.findById(remetenteId).orElseThrow(() -> new NoSuchElementException("remetente não encontrado"));
       Usuario destinatario = colecaoUsuario.findById(destinatarioId).orElseThrow(() -> new NoSuchElementException("destinatario não encontrado"));
       
       Chat chat = new Chat(remetente, destinatario);
       return colecaoChat.save(chat);
+    } */
+
+    private Chat chatJaCriado (Usuario remetente, Usuario destinatario){
+        return colecaoChat.findByRemetenteAndDestinatarioIgnoreOrder(remetente, destinatario).orElse(null);
     }
-	}
+
+    public Chat criarChat(Long remetenteId, Long destinatarioId) throws NoSuchElementException, ChatJaCriadoException {
+      Usuario remetente = colecaoUsuario.findById(remetenteId).orElseThrow(() -> new NoSuchElementException("Remetente não encontrado"));
+      Usuario destinatario = colecaoUsuario.findById(destinatarioId).orElseThrow(() -> new NoSuchElementException("Destinatario não encontrado"));
+
+      if (chatJaCriado(remetente, destinatario) != null)
+        throw new ChatJaCriadoException();
+    
+
+      Chat chat = new Chat(remetente, destinatario);
+      return colecaoChat.save(chat);
+    }
+}
 
 

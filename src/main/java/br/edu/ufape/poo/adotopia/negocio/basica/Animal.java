@@ -64,7 +64,8 @@ public class Animal {
     public List<String> getFotos(){
         return this.fotos;
     }
-    public void setMeusPets(List<String> fotos){
+
+    public void setFotos(List<String> fotos){
         this.fotos = fotos;
     }
     public Especie getEspecie() {
