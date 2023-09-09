@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ufape.poo.adotopia.negocio.basica.Animal;
-import br.edu.ufape.poo.adotopia.negocio.basica.Mensagem;
 import br.edu.ufape.poo.adotopia.negocio.cadastro.exception.UsuarioNaoEncontradoException;
 import br.edu.ufape.poo.adotopia.negocio.fachada.Fachada;
 
@@ -22,7 +21,7 @@ public class AnimalController {
     @Autowired
     private Fachada fachada;
 
-    @GetMapping()
+    @GetMapping("/listar")
     public List<Animal> listarAnimais(){
         return fachada.listarAnimais();
     }
@@ -32,9 +31,9 @@ public class AnimalController {
         return fachada.listarAnimaisPorDono(id);
     }
 
-    @PostMapping("/adicionar")
-    public Animal salvarAnimal(@RequestBody Animal animal) throws UsuarioNaoEncontradoException{
-        return fachada.salvarAnimal(animal);
+    @PostMapping("/adicionar/{id}")
+    public Animal salvarAnimal(@RequestBody Animal animal, @PathVariable Long id) throws UsuarioNaoEncontradoException{
+        return fachada.salvarAnimal(animal, id);
     }
     
 }

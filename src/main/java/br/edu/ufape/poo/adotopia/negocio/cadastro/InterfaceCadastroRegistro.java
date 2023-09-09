@@ -8,8 +8,6 @@ import br.edu.ufape.poo.adotopia.negocio.cadastro.exception.UsuarioNaoEncontrado
 public interface InterfaceCadastroRegistro {
 
      public List<Registro> listarRegistros();
-
-    public Registro salvarRegistro(Registro Entity) throws UsuarioNaoEncontradoException;
     
     public List<Registro> listarRegistrosporadotante(Long id) throws UsuarioNaoEncontradoException;
 }

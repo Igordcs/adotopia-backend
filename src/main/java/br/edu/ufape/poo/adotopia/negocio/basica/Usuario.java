@@ -2,6 +2,7 @@ package br.edu.ufape.poo.adotopia.negocio.basica;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,7 +17,7 @@ public class Usuario {
     @OneToOne(cascade=CascadeType.ALL)
     private Endereco endereco;
     private String descricao;
-
+    
     public Usuario(String nome, String telefone, String email, Endereco endereco, String descricao) {
         super();
         this.nome = nome;

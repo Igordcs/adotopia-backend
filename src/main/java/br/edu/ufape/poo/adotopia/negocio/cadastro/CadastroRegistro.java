@@ -22,17 +22,10 @@ public class CadastroRegistro implements InterfaceCadastroRegistro{
         return colecaoRegistro.findAll();
     }
 
-   public Registro salvarRegistro(Registro entity) throws UsuarioNaoEncontradoException{
-    Usuario usuario = cadastroUsuario.encontraUsuario(entity.getAdotanteId());
-        if(usuario == null)
-            throw new UsuarioNaoEncontradoException(entity.getAdotanteId());
-        return colecaoRegistro.save(entity);
-   }
-    
    public List<Registro> listarRegistrosporadotante(Long adotanteId) throws UsuarioNaoEncontradoException{
         Usuario usuario = cadastroUsuario.encontraUsuario(adotanteId);
         if (usuario == null)
-            throw new UsuarioNaoEncontradoException(adotanteId);
-         return colecaoRegistro.findByAdotanteId(adotanteId);
+        throw new UsuarioNaoEncontradoException(adotanteId);
+        return colecaoRegistro.findByAdotanteId(adotanteId);
 }
 }

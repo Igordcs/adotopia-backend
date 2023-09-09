@@ -11,16 +11,15 @@ public class Mensagem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String conteudoMsg;
-    private Long destinatarioId;
-    private Long remetenteId;
     private Date data;
+    @ManyToOne
+    private Usuario remetenteUsuario;
 
-    public Mensagem(String conteudoMsg, Long destinatarioId, Long remetenteId, Date data) {
+    public Mensagem(String conteudoMsg, Usuario remetenteUsuario, Date data) {
         super();
         this.conteudoMsg = conteudoMsg;
-        this.destinatarioId = destinatarioId;
-        this.remetenteId = remetenteId;
         this.data = data;
+        this.remetenteUsuario = remetenteUsuario;
     }
 
     public Mensagem() {
@@ -35,24 +34,21 @@ public class Mensagem {
         this.id = id;
     }
 
-    public Long getDestinatarioId() {
-        return this.destinatarioId;
+    public Usuario getRemetenteUsuario(){
+        return remetenteUsuario;
     }
-    public void setDestinatarioId(Long destinatarioId) {
-        this.destinatarioId = destinatarioId;
+
+    public void setRemetenteUsuario(Usuario remetenteUsuario){
+        this.remetenteUsuario = remetenteUsuario;
     }
+
     public String getConteudoMsg() {
         return conteudoMsg;
     }
     public void setConteudoMsg(String conteudoMsg) {
         this.conteudoMsg = conteudoMsg;
     }
-    public Long getRemetenteId() {
-        return this.remetenteId;
-    }
-    public void setRemetenteId(Long remetenteId) {
-        this.remetenteId = remetenteId;
-    }
+
     public Date getData() {
         return this.data;
     }

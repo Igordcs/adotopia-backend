@@ -9,27 +9,29 @@ public class Animal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private String name;
     private String avatar;
-    private Long donoId;
+    @OneToOne
+    private Usuario dono;
     private List<String> fotos;
-    private String especie;
+    private Especie especie;
     private String raca;
     private String porte;
     private String descricao;
-    private int idadeAnos;
-    private int idadeMeses;
+    private float idade;
+    private Status status = Status.DISPONIVEL;
 
-    public Animal(String avatar, Long donoId, List<String> fotos, String especie, String raca, String porte, String descricao, int idadeAnos, int idadeMeses) {
+    public Animal(String name, String avatar, Usuario dono, List<String> fotos, Especie especie, String raca, String porte, String descricao, float idade) {
         super();
-        this.donoId = donoId;
+        this.name = name;
+        this.dono = dono;
         this.avatar = avatar;
         this.fotos = fotos;
         this.especie = especie;
         this.raca = raca;
         this.porte = porte;
         this.descricao = descricao;
-        this.idadeAnos = idadeAnos;
-        this.idadeMeses = idadeMeses;
+        this.idade = idade;
     }
 
     public Animal() {
@@ -51,12 +53,12 @@ public class Animal {
         this.avatar = avatar;
     }
 
-    public long getDonoId() {
-        return this.donoId;
+    public Usuario getDono() {
+        return this.dono;
     }
 
-    public void setDonoId(long donoId) {
-        this.donoId = donoId;
+    public void setDono(Usuario dono) {
+        this.dono = dono;
     }
 
     public List<String> getFotos(){
@@ -65,10 +67,10 @@ public class Animal {
     public void setMeusPets(List<String> fotos){
         this.fotos = fotos;
     }
-    public String getEspecie() {
+    public Especie getEspecie() {
         return this.especie;
     }
-    public void setEspecie(String Especie) {
+    public void setEspecie(Especie especie) {
         this.especie = especie;
     }
     public String getRaca() {
@@ -89,17 +91,26 @@ public class Animal {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    public int getIdadeAnos() {
-        return this.idadeAnos;
+    public float getIdade() {
+        return this.idade;
     }
-    public void setIdadeAnos(int idadeAnos) {
-        this.idadeAnos = idadeAnos;
+    public void setIdade(float idade) {
+        this.idade = idade;
     }
-    public int getIdadeMeses() {
-        return this.idadeAnos;
-    }
-    public void setIdadeMeses(int idadeMeses) {
-        this.idadeMeses = idadeMeses;
+       
+    public Status getStatus(){
+        return this.status;
     }
 
+    public void setStatus(Status status){
+        this.status = status;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+       
 }

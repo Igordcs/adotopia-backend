@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.edu.ufape.poo.adotopia.negocio.basica.Registro;
 import br.edu.ufape.poo.adotopia.negocio.basica.Usuario;
 import br.edu.ufape.poo.adotopia.negocio.cadastro.exception.UsuarioJaCadastradoException;
 import br.edu.ufape.poo.adotopia.negocio.cadastro.exception.UsuarioNaoEncontradoException;
@@ -47,5 +48,10 @@ public class UsuarioController {
     @DeleteMapping("/{id}")
     public Usuario deletarUsuario(@PathVariable Long id) throws UsuarioNaoEncontradoException {
         return fachada.deletarUsuario(id);
+    }
+
+    @PostMapping("/adotar/{usuarioId}/{animalId}")
+    public Registro adotarAnimal(@PathVariable Long usuarioId, @PathVariable Long animalId){
+        return fachada.adotarAnimal(usuarioId, animalId);
     }
 }

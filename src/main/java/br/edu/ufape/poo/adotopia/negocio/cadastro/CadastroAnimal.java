@@ -22,10 +22,11 @@ public class CadastroAnimal implements InterfaceCadastroAnimal {
         return colecaoAnimal.findAll();
     }
 
-    public Animal salvarAnimal(Animal entity) throws UsuarioNaoEncontradoException{
-        Usuario usuario = cadastroUsuario.encontraUsuario(entity.getDonoId());
+    public Animal salvarAnimal(Animal entity, Long id) throws UsuarioNaoEncontradoException{
+        Usuario usuario = cadastroUsuario.encontraUsuario(id);
         if(usuario == null)
-            throw new UsuarioNaoEncontradoException(entity.getDonoId());
+            throw new UsuarioNaoEncontradoException(id);
+        entity.setDono(usuario);
         return colecaoAnimal.save(entity);
     }
 

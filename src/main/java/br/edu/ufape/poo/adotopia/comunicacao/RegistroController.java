@@ -26,11 +26,6 @@ public class RegistroController {
         return fachada.listarRegistros();
     }
 
-    @PostMapping("/salvar")
-    public Registro salvarRegistro(@RequestBody Registro registro) throws UsuarioNaoEncontradoException{
-        return fachada.salvarRegistro(registro);
-    }
-
     @GetMapping("/{id}")
     public List<Registro> listarAnimaisPorDono(@PathVariable Long id) throws UsuarioNaoEncontradoException {
         return fachada.listarRegistrosporadotante(id);

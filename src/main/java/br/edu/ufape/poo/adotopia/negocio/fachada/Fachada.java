@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.ufape.poo.adotopia.negocio.basica.Animal;
+import br.edu.ufape.poo.adotopia.negocio.basica.Chat;
 import br.edu.ufape.poo.adotopia.negocio.basica.Mensagem;
 import br.edu.ufape.poo.adotopia.negocio.basica.Registro;
 import br.edu.ufape.poo.adotopia.negocio.basica.Usuario;
 import br.edu.ufape.poo.adotopia.negocio.cadastro.CadastroAnimal;
+import br.edu.ufape.poo.adotopia.negocio.cadastro.CadastroChat;
 import br.edu.ufape.poo.adotopia.negocio.cadastro.CadastroMensagem;
 import br.edu.ufape.poo.adotopia.negocio.cadastro.CadastroRegistro;
 import br.edu.ufape.poo.adotopia.negocio.cadastro.CadastroUsuario;
@@ -23,9 +25,11 @@ public class Fachada {
     @Autowired
     private CadastroAnimal cadastroAnimal;
     @Autowired
-    private CadastroMensagem cadastroMensagem;
+    private CadastroChat cadastroChat;
     @Autowired
     private CadastroRegistro cadastroRegistro;
+    @Autowired
+    private CadastroMensagem cadastroMensagem;
 
     public List<Usuario> listarUsuarios() {
         return cadastroUsuario.listarUsuarios();
@@ -51,39 +55,39 @@ public class Fachada {
         return cadastroAnimal.listarAnimais();
     }
 
-    public Animal salvarAnimal(Animal entity) throws UsuarioNaoEncontradoException{
-        return cadastroAnimal.salvarAnimal(entity);
+    public Animal salvarAnimal(Animal entity, Long id) throws UsuarioNaoEncontradoException{
+        return cadastroAnimal.salvarAnimal(entity, id);
     }
 
     public List<Animal> listarAnimaisPorDono(Long donoId) throws UsuarioNaoEncontradoException {
         return cadastroAnimal.listarAnimaisPeloDono(donoId);
     }
 
-    public List<Mensagem> listarTodasMensagens(){
-        return cadastroMensagem.listarTodasMensagens();
+    public List<Chat> listarTodosChats(){
+        return cadastroChat.listarTodosChats();
     }
 
-    public List<Mensagem> listarMensagensRemetente(Long id){
-        return cadastroMensagem.listarMensagensRemetente(id);
+    public List<Chat> listarChatsId(Long id){
+        return cadastroChat.listarChatsId(id);
     }
 
-    public Mensagem enviarMensagem(Mensagem entity){
-        return cadastroMensagem.enviarMensagem(entity);
-      }
-
-    public Mensagem deletarMensagem(Long id){
-        return cadastroMensagem.deletarMensagem(id);
+    public Mensagem enviarMensagem(Mensagem mensagem, Long chatId, Long remetenteId){
+        return cadastroMensagem.enviarMensagem(mensagem, chatId, remetenteId);
     }
 
     public List<Registro> listarRegistros(){
         return cadastroRegistro.listarRegistros();
     }
 
-    public Registro salvarRegistro(Registro entity) throws UsuarioNaoEncontradoException{
-        return cadastroRegistro.salvarRegistro(entity);
-    }
-
     public List<Registro> listarRegistrosporadotante(Long AdotanteId) throws UsuarioNaoEncontradoException{
         return cadastroRegistro.listarRegistrosporadotante(AdotanteId);
+    }
+
+    public Registro adotarAnimal (Long usuarioId, Long animalId){
+        return cadastroUsuario.adotarAnimal(usuarioId, animalId);
+    }
+
+    public Chat criarChat (Long remetenteId, Long destinatarioId){
+        return cadastroChat.criarChat(remetenteId, destinatarioId);
     }
 }

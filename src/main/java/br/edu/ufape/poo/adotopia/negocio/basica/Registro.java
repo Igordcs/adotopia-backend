@@ -11,19 +11,22 @@ public class Registro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private Long adotanteId;
-    private Long doadorId;
-    private Status status;
+    @OneToOne
+    private Usuario adotante;
+    @OneToOne
+    private Usuario doador;
     private Date data;
     private String protocolo;
+    @OneToOne
+    private Animal animal;
 
-    public Registro(Long adotanteId, Long doadorId, Status status, Date data, String protocolo) {
+    public Registro(Usuario adotante, Usuario doador, Date data, String protocolo, Animal animal) {
         super();
-        this.adotanteId = adotanteId;
-        this.doadorId = doadorId;
-        this.status = status;
+        this.adotante = adotante;
+        this.doador = doador;
         this.data = data;
         this.protocolo = protocolo;
+        this.animal = animal;
     }
 
     public Registro() {
@@ -36,27 +39,18 @@ public class Registro {
         this.id = id;
     }
 
-    public Long getAdotanteId() {
-        return this.adotanteId;
+    public Usuario getAdotante() {
+        return this.adotante;
     }
-    public void setAdotanteId(Long adotanteId) {
-        this.adotanteId = adotanteId;
+    public void setAdotante(Usuario adotante) {
+        this.adotante = adotante;
     }
-    public Long getDoadorId() {
-        return this.doadorId;
+    public Usuario getDoador() {
+        return this.doador;
     }
-    public void setDoadorId(Long doadorId) {
-        this.doadorId = doadorId;
+    public void setDoadorId(Usuario doador) {
+        this.doador = doador;
     }
-    
-    public Status getStatus(){
-        return this.status;
-    }
-
-    public void setStatus(Status status){
-        this.status = status;
-    }
-
 
     public Date getData() {
         return this.data;
@@ -70,6 +64,13 @@ public class Registro {
     }
     public void setProtocolo(String protocolo) {
         this.protocolo = protocolo;
+    }
+
+    public Animal getAnimal() {
+        return this.animal;
+    }
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
     }
 
 

@@ -1,43 +1,34 @@
 package br.edu.ufape.poo.adotopia.negocio.cadastro;
 
-import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.edu.ufape.poo.adotopia.dados.IntefaceColecaoMensagem;
+import br.edu.ufape.poo.adotopia.dados.IntefaceColecaoChat;
+import br.edu.ufape.poo.adotopia.dados.InterfaceColecaoMensagem;
+import br.edu.ufape.poo.adotopia.dados.InterfaceColecaoUsuario;
+import br.edu.ufape.poo.adotopia.negocio.basica.Chat;
 import br.edu.ufape.poo.adotopia.negocio.basica.Mensagem;
+import br.edu.ufape.poo.adotopia.negocio.basica.Usuario;
 
 @Service
-public class CadastroMensagem implements InterfaceCadastroMensagem {
-
+public class CadastroMensagem {
     @Autowired
-    private IntefaceColecaoMensagem colecaoMensagem;
+    IntefaceColecaoChat colecaoChat;
+    @Autowired
+    InterfaceColecaoUsuario colecaoUsuario;
+    @Autowired
+    InterfaceColecaoMensagem colecaoMensagem;
 
-    public List<Mensagem> listarTodasMensagens(){
-      return colecaoMensagem.findAll();
-    }
-
-    public List<Mensagem> listarMensagensRemetente(Long id) {
-		  return colecaoMensagem.findAllByRemetenteId(id);
-    }
-
-    public Mensagem enviarMensagem(Mensagem entity){
-      return colecaoMensagem.save(entity);
-    }
-
-    public Mensagem deletarMensagem(Long id){
-      Mensagem mensagem = colecaoMensagem.findById(id).orElse(null);
-
-      if(mensagem == null)
-        return null;
-
-      
-      colecaoMensagem.delete(mensagem);
+    public Mensagem enviarMensagem(Mensagem mensagem, Long chatId, Long remetenteId){
+      Chat chat = colecaoChat.findById(chatId).orElseThrow(() -> new NoSuchElementException("Chat não encontrado"));
+      Usuario usuario = colecaoUsuario.findById(remetenteId).orElseThrow(() -> new NoSuchElementException("Remetente não encontrado"));
+      mensagem.setRemetenteUsuario(usuario);
+      chat.getMensagens().add(mensagem);
+      colecaoChat.saveAndFlush(chat);
+      colecaoMensagem.save(mensagem);
       return mensagem;
-
     }
 
-	}
-
-
+}

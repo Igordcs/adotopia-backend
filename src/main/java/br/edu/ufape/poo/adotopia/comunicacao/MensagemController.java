@@ -1,10 +1,6 @@
 package br.edu.ufape.poo.adotopia.comunicacao;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,26 +13,12 @@ import br.edu.ufape.poo.adotopia.negocio.fachada.Fachada;
 @RestController
 @RequestMapping("/mensagem")
 public class MensagemController {
+
     @Autowired
     private Fachada fachada;
 
-    @GetMapping("/listar")
-    public List<Mensagem> listarTodasMensagens(){
-        return fachada.listarTodasMensagens();
-    }
-
-    @GetMapping("/listar/{id}")
-    public List<Mensagem> listarMensagensRemetente(@PathVariable Long id) {
-        return fachada.listarMensagensRemetente(id);
-    }
-
-    @PostMapping("/enviar")
-    public Mensagem enviarMensagem(@RequestBody Mensagem mensagem){
-        return fachada.enviarMensagem(mensagem);
-    }
-
-    @DeleteMapping("/deletar/{id}")
-    public Mensagem deletarMensagem(@PathVariable Long id){
-        return fachada.deletarMensagem(id);
+    @PostMapping("/enviar/{chatId}/{remetenteId}")
+    public Mensagem enviarMensagem(@RequestBody Mensagem mensagem, @PathVariable Long chatId, @PathVariable Long remetenteId){
+        return fachada.enviarMensagem(mensagem, chatId, remetenteId);
     }
 }

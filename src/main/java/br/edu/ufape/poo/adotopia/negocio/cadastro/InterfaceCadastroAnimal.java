@@ -9,7 +9,7 @@ public interface InterfaceCadastroAnimal {
 
     public List <Animal> listarAnimais();
 
-    public Animal salvarAnimal(Animal entity) throws UsuarioNaoEncontradoException;
+    public Animal salvarAnimal(Animal entity, Long id) throws UsuarioNaoEncontradoException;
     
     public List<Animal> listarAnimaisPeloDono(Long id) throws UsuarioNaoEncontradoException;
 }
