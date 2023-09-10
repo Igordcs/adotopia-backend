@@ -17,7 +17,7 @@ public class Registro {
     private Usuario doador;
     private Date data;
     private String protocolo;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Animal animal;
 
     public Registro(Usuario adotante, Usuario doador, Date data, String protocolo, Animal animal) {

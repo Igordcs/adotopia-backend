@@ -1,4 +1,4 @@
-package br.edu.ufape.poo.adotopia;
+ package br.edu.ufape.poo.adotopia;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -18,7 +18,7 @@ public interface InterfaceCadastroUsuario {
 
     public Usuario alterarUsuario(Usuario entity) throws UsuarioNaoEncontradoException;
 
-    public Usuario encontraUsuario(Long id);
+    public Usuario encontraUsuario(Long id) throws UsuarioNaoEncontradoException;
 
     public Usuario deletarUsuario(Long id) throws UsuarioNaoEncontradoException;
 

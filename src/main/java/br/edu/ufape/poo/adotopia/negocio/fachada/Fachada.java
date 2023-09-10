@@ -42,7 +42,7 @@ public class Fachada {
         return cadastroUsuario.salvarUsuario(entity);
     }
 
-    public Usuario encontraUsuario(Long id) {
+    public Usuario encontraUsuario(Long id) throws UsuarioNaoEncontradoException{
         return cadastroUsuario.encontraUsuario(id);
     }
 

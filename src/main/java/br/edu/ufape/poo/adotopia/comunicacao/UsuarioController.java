@@ -1,8 +1,12 @@
 package br.edu.ufape.poo.adotopia.comunicacao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,30 +30,59 @@ public class UsuarioController {
     private Fachada fachada;
 
     @GetMapping()
-    public List<Usuario> listarUsuarios() {
-        return fachada.listarUsuarios();
+    public ResponseEntity<List<Usuario>> listarUsuarios() {
+        return new ResponseEntity<List<Usuario>>(fachada.listarUsuarios(), HttpStatus.OK);
     }
         
     @PostMapping()
-    public Usuario cadastrarUsuario(@RequestBody Usuario usuario) throws UsuarioJaCadastradoException {
-        return fachada.salvarUsuario(usuario);
+    public ResponseEntity<?> cadastrarUsuario(@RequestBody Usuario usuario) throws UsuarioJaCadastradoException {
+        try {
+            return new ResponseEntity<Usuario>(fachada.salvarUsuario(usuario), HttpStatus.CREATED);
+        }catch(UsuarioJaCadastradoException e) {
+            Map<String, String> response = new HashMap<>();
+            response.put("erro", "Usuário já cadastrado.");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+        }
     }
 
     @GetMapping("/{id}")
-    public Usuario encontraUsuario(@PathVariable Long id) {
-        return fachada.encontraUsuario(id);
+    public ResponseEntity<?> encontraUsuario(@PathVariable Long id) throws UsuarioNaoEncontradoException {
+        try {
+            return new ResponseEntity<Usuario>(fachada.encontraUsuario(id), HttpStatus.OK);
+        }catch(UsuarioNaoEncontradoException e) {
+            Map<String, String> response = new HashMap<>();
+            response.put("erro", "Usuário não encontrado.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+        
     }
 
-    @PutMapping("")
-    public Usuario alterarUsuario(@RequestBody Usuario usuario) throws UsuarioNaoEncontradoException {
-        return fachada.alterarUsuario(usuario);
+    @PutMapping()
+    public ResponseEntity<?> alterarUsuario(@RequestBody Usuario usuario) throws UsuarioNaoEncontradoException {
+        try {
+            return new ResponseEntity<Usuario>(fachada.alterarUsuario(usuario), HttpStatus.OK);
+        }catch(UsuarioNaoEncontradoException e) {
+            Map<String, String> response = new HashMap<>();
+            response.put("erro", "Usuário não encontrado.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+      
     }
 
     @DeleteMapping("/{id}")
-    public Usuario deletarUsuario(@PathVariable Long id) throws UsuarioNaoEncontradoException {
-        return fachada.deletarUsuario(id);
-    }
+    public ResponseEntity<?> deletarUsuario(@PathVariable Long id) throws UsuarioNaoEncontradoException {
+        try {
+            return new ResponseEntity<Usuario>(fachada.deletarUsuario(id), HttpStatus.OK);
+        }catch(UsuarioNaoEncontradoException e) {
+            Map<String, String> response = new HashMap<>();
+            response.put("erro", "Usuário não encontrado.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+      
 
+        
+    }
+    
     @PostMapping("/adotar/{usuarioId}/{animalId}")
     public Registro adotarAnimal(@PathVariable Long usuarioId, @PathVariable Long animalId){
         return fachada.adotarAnimal(usuarioId, animalId);

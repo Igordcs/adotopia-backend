@@ -11,7 +11,8 @@ public class Animal {
     private long id;
     private String name;
     private String avatar;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "dono_id")
     private Usuario dono;
     private List<String> fotos;
     private Especie especie;

@@ -48,23 +48,26 @@ public class CadastroUsuario implements InterfaceCadastroUsuario {
         }
     } 
 
-    public Usuario encontraUsuario(Long id) {
-        return colecaoUsuario.findById(id).orElse(null);
+    public Usuario encontraUsuario(Long id) throws UsuarioNaoEncontradoException {
+        return colecaoUsuario.findById(id).orElseThrow(() -> new UsuarioNaoEncontradoException(id));
     }
 
 
     public Usuario alterarUsuario(Usuario entity) throws UsuarioNaoEncontradoException {
-        Usuario user = encontraUsuario(entity.getId());
-        if (user == null)
-            return null;
+        Usuario usuario;
+        try {
+            usuario = encontraUsuario(entity.getId());
+        } catch(UsuarioNaoEncontradoException e) {
+            throw new UsuarioNaoEncontradoException(entity.getId());
+        }
 
-        user.setNome(entity.getNome());
-        user.setEmail(entity.getEmail());
-        user.setTelefone(entity.getTelefone());
-        user.setDescricao(entity.getDescricao());        
+        usuario.setNome(entity.getNome());
+        usuario.setEmail(entity.getEmail());
+        usuario.setTelefone(entity.getTelefone());
+        usuario.setDescricao(entity.getDescricao());        
 
         if(entity.getEndereco() != null) {
-            Endereco enderecoUsuario = user.getEndereco();
+            Endereco enderecoUsuario = usuario.getEndereco();
             enderecoUsuario.setLogradouro(entity.getEndereco().getLogradouro());
             enderecoUsuario.setCep(entity.getEndereco().getCep());
             enderecoUsuario.setNumero(entity.getEndereco().getNumero());
@@ -72,14 +75,16 @@ public class CadastroUsuario implements InterfaceCadastroUsuario {
             enderecoUsuario.setBairro(entity.getEndereco().getBairro());
             enderecoUsuario.setComplemento(entity.getEndereco().getComplemento());
         }
-        return colecaoUsuario.saveAndFlush(user);
+        return colecaoUsuario.saveAndFlush(usuario);
     }
 
     public Usuario deletarUsuario(Long id) throws UsuarioNaoEncontradoException {
-        Usuario usuario = encontraUsuario(id);
-        if (usuario == null)
-            return null;
-
+        Usuario usuario;
+        try {
+            usuario = encontraUsuario(id);
+        } catch(UsuarioNaoEncontradoException e) {
+            throw new UsuarioNaoEncontradoException(id);
+        }
         colecaoUsuario.deleteById(id);
         return usuario;
     }
