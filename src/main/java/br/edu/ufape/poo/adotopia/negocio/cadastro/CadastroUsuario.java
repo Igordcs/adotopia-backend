@@ -32,11 +32,7 @@ public class CadastroUsuario implements InterfaceCadastroUsuario {
     }
 
     public Usuario procurarUsuarioEmail(String email) throws UsuarioNaoEncontradoException {
-        Usuario usuario = colecaoUsuario.findByEmail(email).orElse(null);
-        if(usuario == null) {
-            throw new UsuarioNaoEncontradoException(null);
-        }
-        return usuario;
+        return colecaoUsuario.findByEmail(email).orElseThrow(() -> new UsuarioNaoEncontradoException(email));
     } 
 
     public Usuario salvarUsuario(Usuario entity) throws UsuarioJaCadastradoException {

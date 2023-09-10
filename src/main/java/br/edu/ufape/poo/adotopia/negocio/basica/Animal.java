@@ -14,21 +14,29 @@ public class Animal {
     @ManyToOne
     @JoinColumn(name = "dono_id")
     private Usuario dono;
-    private List<String> fotos;
+    private List<String> fotos;    
+    private List<String> comportamentos;
     private Especie especie;
+    private boolean vermifugado;
+    private boolean vacinado;
+    private boolean castrado;
     private String raca;
     private String porte;
     private String descricao;
     private float idade;
     private Status status = Status.DISPONIVEL;
 
-    public Animal(String name, String avatar, Usuario dono, List<String> fotos, Especie especie, String raca, String porte, String descricao, float idade) {
+    public Animal(String name, String avatar, Usuario dono, List<String> fotos, List<String> comportamentos, Especie especie, boolean vermifugado, boolean vacinado, boolean castrado, String raca, String porte, String descricao, float idade) {
         super();
         this.name = name;
         this.dono = dono;
         this.avatar = avatar;
         this.fotos = fotos;
+        this.comportamentos = comportamentos;
         this.especie = especie;
+        this.vermifugado = vermifugado;
+        this.vacinado = vacinado;
+        this.castrado = castrado;
         this.raca = raca;
         this.porte = porte;
         this.descricao = descricao;
@@ -65,13 +73,37 @@ public class Animal {
     public List<String> getFotos(){
         return this.fotos;
     }
-
     public void setFotos(List<String> fotos){
         this.fotos = fotos;
+    }
+    public List<String> getComportamentos(){
+        return this.comportamentos;
+    }
+    public void setComportamentos(List<String> comportamentos){
+        this.comportamentos = comportamentos;
     }
     public Especie getEspecie() {
         return this.especie;
     }
+    public boolean getVermifugado() {
+        return this.vermifugado;
+    }
+    public void setVermifugado(boolean vermifugado) {
+        this.vermifugado = vermifugado;
+    }
+    public boolean getVacinado() {
+        return this.vacinado;
+    }
+    public void setVacinado(boolean vacinado) {
+        this.vacinado = vacinado;
+    }
+     public boolean getCastrado() {
+        return this.castrado;
+    }
+    public void setCastrado(boolean castrado) {
+        this.castrado = castrado;
+    }
+
     public void setEspecie(Especie especie) {
         this.especie = especie;
     }

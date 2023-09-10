@@ -52,6 +52,10 @@ public class CadastroAnimal implements InterfaceCadastroAnimal {
         animal.setName(entity.getName());
         animal.setAvatar(entity.getAvatar());
         animal.setFotos(entity.getFotos());
+        animal.setComportamentos(entity.getComportamentos());
+        animal.setVermifugado(entity.getVermifugado());
+        animal.setCastrado(entity.getCastrado());
+        animal.setVacinado(entity.getVacinado());
         animal.setPorte(entity.getPorte());
         animal.setDescricao(entity.getDescricao());
         animal.setIdade(entity.getIdade());

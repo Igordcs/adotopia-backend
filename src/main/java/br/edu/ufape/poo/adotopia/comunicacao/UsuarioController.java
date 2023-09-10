@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ufape.poo.adotopia.negocio.basica.Registro;
@@ -45,10 +46,10 @@ public class UsuarioController {
         }
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> encontraUsuario(@PathVariable Long id) throws UsuarioNaoEncontradoException {
+    @GetMapping("/entrar")
+    public ResponseEntity<?> encontraUsuario(@RequestParam("email") String email) throws UsuarioNaoEncontradoException {
         try {
-            return new ResponseEntity<Usuario>(fachada.encontraUsuario(id), HttpStatus.OK);
+            return new ResponseEntity<Usuario>(fachada.encontraUsuario(email), HttpStatus.OK);
         }catch(UsuarioNaoEncontradoException e) {
             Map<String, String> response = new HashMap<>();
             response.put("erro", "Usuário não encontrado.");

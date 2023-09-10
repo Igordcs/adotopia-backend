@@ -12,15 +12,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ufape.poo.adotopia.negocio.basica.Chat;
-import br.edu.ufape.poo.adotopia.negocio.basica.Mensagem;
-import br.edu.ufape.poo.adotopia.negocio.basica.Usuario;
 import br.edu.ufape.poo.adotopia.negocio.cadastro.exception.ChatJaCriadoException;
-import br.edu.ufape.poo.adotopia.negocio.cadastro.exception.UsuarioJaCadastradoException;
 import br.edu.ufape.poo.adotopia.negocio.fachada.Fachada;
 
 @RestController
@@ -29,11 +25,9 @@ public class ChatController {
     @Autowired
     private Fachada fachada;
 
-
     @GetMapping("/listar")
     public ResponseEntity<List<Chat>> listarTodosChats(){
         return new ResponseEntity<List<Chat>>(fachada.listarTodosChats(), HttpStatus.OK);
-        
     }
 
     @GetMapping("/listar/{id}")

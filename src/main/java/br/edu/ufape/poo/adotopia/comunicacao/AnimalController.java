@@ -18,11 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ufape.poo.adotopia.negocio.basica.Animal;
-import br.edu.ufape.poo.adotopia.negocio.basica.Chat;
-import br.edu.ufape.poo.adotopia.negocio.basica.Registro;
-import br.edu.ufape.poo.adotopia.negocio.basica.Usuario;
 import br.edu.ufape.poo.adotopia.negocio.cadastro.exception.AnimalNaoEncontradoException;
-import br.edu.ufape.poo.adotopia.negocio.cadastro.exception.ChatJaCriadoException;
 import br.edu.ufape.poo.adotopia.negocio.cadastro.exception.UsuarioNaoEncontradoException;
 import br.edu.ufape.poo.adotopia.negocio.fachada.Fachada;
 
@@ -35,7 +31,6 @@ public class AnimalController {
 
     @GetMapping("/listar")
     public List<Animal> listarAnimais(){
-        
         return fachada.listarAnimais();
     }
 
