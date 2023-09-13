@@ -29,6 +29,11 @@ public class AnimalController {
     @Autowired
     private Fachada fachada;
 
+    public AnimalController(Fachada fachada) {
+        this.fachada = fachada;
+    }
+
+
     @GetMapping("/listar")
     public List<Animal> listarAnimais(){
         return fachada.listarAnimais();
@@ -98,5 +103,4 @@ public class AnimalController {
        
     
 }
-
 }
